@@ -1,6 +1,7 @@
 """
 Funciones auxiliares para el programa "linea"
 """
+import matplotlib.pyplot as plt
 
 
 def calcular_y(x: float, m: float, b: float)->float:
@@ -10,6 +11,21 @@ def calcular_y(x: float, m: float, b: float)->float:
         Retorna el valor de "y"
     """
     return m * x + b
+
+def grafica_linea(X: list, Y:list, m:float, b:float):
+    """
+    Grafica una linea recta
+    X: lista de valores de x
+    Y: lista de valores de y
+    m. pendiente
+    b: interseccion y
+    """
+    plt.plot(X, Y)
+    plt.title(f"Linea recta con pendiente = {m} e interseccion en y = {b}")
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.grid()
+    plt.show()
 
 def test_linea():
     """
