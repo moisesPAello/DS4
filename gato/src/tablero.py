@@ -15,6 +15,7 @@ def dibuja_tablero(simbolos: dict):
     {simbolos['7']} | {simbolos['8']} | {simbolos['9']}
     ''')
 
+
 def ia(simbolos: dict):
     """Estrategia de la computadora"""
     ocupado = True
@@ -23,6 +24,7 @@ def ia(simbolos: dict):
         if simbolos[x] not in ["X", "O"]:
             simbolos[x] = "O"
             ocupado = False
+
 
 def usuario(simbolos: dict):
     """Estrategia del usuario"""
@@ -37,19 +39,21 @@ def usuario(simbolos: dict):
             else:
                 print("Esa casilla ya esta ocupada")
     
+
 def juego(simbolos: dict):
     """Juego del gato"""
     lista_combinaciones = [
         ["1", "2", "3"], #Filas
-        ["4", "5", "6"], #
-        ["7", "8", "9"], #
+        ["4", "5", "6"], 
+        ["7", "8", "9"], 
         
         ["1", "4", "7"], #Columnas
-        ["2", "5", "8"], #
-        ["3", "6", "9"], #
+        ["2", "5", "8"], 
+        ["3", "6", "9"], 
         
         ["1", "5", "9"], #Diagonales
         ["3", "5", "7"]]
+
 
 def checa_winner(simbolos: dict, combinaciones: list):
     """Checa si hay un ganador"""
@@ -58,9 +62,10 @@ def checa_winner(simbolos: dict, combinaciones: list):
             return simbolos[c[0]]
         return None
 
+
 if __name__ == '__main__':
         numeros = [str(i) for i in range(1,10)]
-        dsimbolos = {x:x for x in numeros}
+        dsimbolos = {x: x for x in numeros}
         dibuja_tablero(dsimbolos)
         ia(dsimbolos)
         dibuja_tablero(dsimbolos)
