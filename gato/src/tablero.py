@@ -20,9 +20,9 @@ def ia(simbolos: dict):
     """Estrategia de la computadora"""
     ocupado = True
     while ocupado is True:
-        x = random.choice(list(simbolos.keys()))
-        if simbolos[x] not in ["X", "O"]:
-            simbolos[x] = "O"
+        casilla_elegida = random.choice(list(simbolos.keys()))
+        if simbolos[casilla_elegida] not in ["X", "O"]:
+            simbolos[casilla_elegida] = "O"
             ocupado = False
 
 
@@ -53,33 +53,43 @@ def juego(simbolos: dict):
         
         ["1", "5", "9"], #Diagonales
         ["3", "5", "7"]]
+    
+    ganador = None
+    while ganador is None:
+        """Ciclo del juego"""
+        """Turno de la computadora"""
+        ia(simbolos)
+        dibuja_tablero(simbolos)
+        ganador = checa_winner(simbolos, lista_combinaciones)
+        if ganador is not None:
+            print(f"¡El ganador es {ganador}!")
+            break
+        if all(simbolos[key] in ["X", "O"] for key in simbolos):
+            print("¡Es un empate!")
+            break
+        
+        """Turno del usuario"""
+        usuario(simbolos)
+        dibuja_tablero(simbolos)
+        ganador = checa_winner(simbolos, lista_combinaciones)
+        if ganador is not None:
+            print(f"¡El ganador es {ganador}!")
+            break
+        if all(simbolos[key] in ["X", "O"] for key in simbolos):
+            print("¡Es un empate!")
+            break
+
 
 
 def checa_winner(simbolos: dict, combinaciones: list):
     """Checa si hay un ganador"""
-    for c in combinaciones:
-        if simbolos[c[0]] == simbolos[c[1]] == simbolos[c[2]]:
-            return simbolos[c[0]]
-        return None
+    for combinacion in combinaciones:
+        if simbolos[combinacion[0]] == simbolos[combinacion[1]] == simbolos[combinacion[2]]:
+            return simbolos[combinacion[0]]
+    return None
 
 
 if __name__ == '__main__':
         numeros = [str(i) for i in range(1,10)]
         dsimbolos = {x: x for x in numeros}
-        dibuja_tablero(dsimbolos)
-        ia(dsimbolos)
-        dibuja_tablero(dsimbolos)
-        usuario(dsimbolos)
-        dibuja_tablero(dsimbolos)
-
-
-
-        """x = random.choice(numeros)
-        numeros.remove(x)
-        dsimbolos[x] = 'X'
-        dibuja_tablero(dsimbolos)
-        o = random.choice(numeros)
-        numeros.remove(o)
-        dsimbolos[o] = 'O'
-        dibuja_tablero(dsimbolos)
-        print(numeros)"""
+        juego(dsimbolos)
