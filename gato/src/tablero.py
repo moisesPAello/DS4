@@ -52,31 +52,33 @@ def juego(simbolos: dict):
         ["3", "6", "9"], 
         
         ["1", "5", "9"], #Diagonales
-        ["3", "5", "7"]]
+        ["3", "5", "7"]
+    ]
     en_juego = True
     movimientos = 0
     dibuja_tablero(simbolos)
+    
     while en_juego:
         usuario(simbolos)
         dibuja_tablero(simbolos)
         movimientos += 1
         gana = checa_winner(simbolos, lista_combinaciones)
-        if (gana is not None):
-            en_juego = False
-        if movimientos == 9:
+        if gana is not None or movimientos == 9:
             en_juego = False
             continue
 
         ia(simbolos)
-        movimientos += 1
         dibuja_tablero(simbolos)
-        if (gana is not None):
-            en_juego = False
-        if movimientos == 9:
+        movimientos += 1
+        gana = checa_winner(simbolos, lista_combinaciones)
+        if gana is not None or movimientos == 9:
             en_juego = False
             continue
-    
-    print(f"{gana} ha ganado")
+
+    if gana is None:
+        print("Empate")
+    else:
+        print(f"{gana} ha ganado")
 
 
 def checa_winner(simbolos: dict, combinaciones: list):
@@ -84,7 +86,7 @@ def checa_winner(simbolos: dict, combinaciones: list):
     for c in combinaciones:
         if simbolos[c[0]] == simbolos[c[1]] == simbolos[c[2]]:
             return simbolos[c[0]]
-        return None
+    return None
 
 
 if __name__ == '__main__':
@@ -92,12 +94,12 @@ if __name__ == '__main__':
         dsimbolos = {x: x for x in numeros}
         juego(dsimbolos)
         
+
         """dibuja_tablero(dsimbolos)
         ia(dsimbolos)
         dibuja_tablero(dsimbolos)
         usuario(dsimbolos)
         dibuja_tablero(dsimbolos)"""
-
 
 
         """x = random.choice(numeros)
