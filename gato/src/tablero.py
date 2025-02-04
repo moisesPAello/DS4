@@ -53,6 +53,11 @@ def juego(simbolos: dict):
         
         ["1", "5", "9"], #Diagonales
         ["3", "5", "7"]]
+    en_juego = True
+    while en_juego:
+        dibuja_tablero(simbolos)
+        usuario(simbolos)
+        
 
 
 def checa_winner(simbolos: dict, combinaciones: list):
