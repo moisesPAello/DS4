@@ -7,13 +7,13 @@ def dibuja_tablero(simbolos: dict):
     '''
     Dibuja tablero del juego de el gato
     '''
-    print(f'''
-    {simbolos['1']} | {simbolos['2']} | {simbolos['3']}
+    print(f"""
+    {simbolos["1"]} | {simbolos["2"]} | {simbolos["3"]}
     ---------
-    {simbolos['4']} | {simbolos['5']} | {simbolos['6']}
+    {simbolos["4"]} | {simbolos["5"]} | {simbolos["6"]}
     ---------
-    {simbolos['7']} | {simbolos['8']} | {simbolos['9']}
-    ''')
+    {simbolos["7"]} | {simbolos["8"]} | {simbolos["9"]}
+    """)
 
 
 def ia(simbolos: dict):
@@ -74,11 +74,7 @@ def juego(simbolos: dict):
         if gana is not None or movimientos == 9:
             en_juego = False
             continue
-
-    if gana is None:
-        print("Empate")
-    else:
-        print(f"{gana} ha ganado")
+    return gana
 
 
 def checa_winner(simbolos: dict, combinaciones: list):
@@ -92,7 +88,11 @@ def checa_winner(simbolos: dict, combinaciones: list):
 if __name__ == '__main__':
         numeros = [str(i) for i in range(1,10)]
         dsimbolos = {x: x for x in numeros}
-        juego(dsimbolos)
+        ganador = juego(dsimbolos)
+        if ganador is None:
+            print("Empate")
+        else:
+            print(f"El ganador es {ganador}")
         
 
         """dibuja_tablero(dsimbolos)
