@@ -84,6 +84,35 @@ def checa_winner(simbolos: dict, combinaciones: list):
             return simbolos[c[0]]
     return None
 
+def actualiza_score(score: dict, ganador: str):
+    X = score["X"]
+    O = score["O"]
+    if ganador is not None:
+        print(f"El ganador es {ganador}")
+        if ganador == "X":
+            X["Ganador"] += 1
+            O["Perdedor"] += 1
+        elif ganador == "O":
+            O["Ganador"] += 1
+            X["Perdedor"] += 1
+    else:
+        print("Empate")
+        X["Empate"] += 1
+        O["Empate"] += 1
+
+def mostrar_score(score: dict):
+    print("Score".center(20, "="))
+    print("Jugador X".center(20))
+    print(f"Ganados: {score['X']['Ganador']}".center(20))
+    print(f"Perdidos: {score['X']['Perdedor']}".center(20))
+    print(f"Empatados: {score['X']['Empate']}".center(20))
+    print("")
+    print("Jugador O".center(20))
+    print(f"Ganados: {score['O']['Ganador']}".center(20))
+    print(f"Perdidos: {score['O']['Perdedor']}".center(20))
+    print(f"Empatados: {score['O']['Empate']}".center(20))
+    print("".center(20, "="))
+
 
 if __name__ == '__main__':
         numeros = [str(i) for i in range(1,10)]

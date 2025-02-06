@@ -15,19 +15,11 @@ def main():
     while corriendo:
         diccionario = {numero: numero for numero in numeros}
         ganador = tablero.juego(diccionario)
-        if ganador is not None:
-            print(f"El ganador es {ganador}")
-            if ganador == "X":
-                X["Ganador"] += 1
-                O["Perdedor"] += 1
-            elif ganador == "O":
-                O["Ganador"] += 1
-                X["Perdedor"] += 1
-        else:
-            print("Empate")
-            X["Empate"] += 1
-            O["Empate"] += 1
-    
+        tablero.actualiza_score(score, ganador)
+        tablero.mostrar_score(score)
+        respuesta = input("Desea jugar otra vez? (s/n): ")
+        if respuesta.lower() != 's':
+            corriendo = False
 
 if __name__ == '__main__':
     main()
