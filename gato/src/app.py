@@ -17,8 +17,10 @@ def main():
         ganador = tablero.juego(diccionario)
         tablero.actualiza_score(score, ganador)
         tablero.mostrar_score(score)
-        respuesta = input("Desea jugar otra vez? (s/n): ")
-        if respuesta.lower() != 's':
+        respuesta = input("¿Desea jugar otra vez? (s/n): ")
+        while respuesta.lower() not in ['s', 'n']:
+            respuesta = input("Respuesta no válida. ¿Desea jugar otra vez? (s/n): ")
+        if respuesta.lower() == 'n':
             corriendo = False
 
 if __name__ == '__main__':
