@@ -68,8 +68,9 @@ def adivina_letra(abc: dict, palabra: str, adivinadas: list,oportunidades: int):
             palabra_oculta += letra
         else:
             palabra_oculta += "_"
+    abc_lista = " ".join(abc.keys())
     print(f"Tienes {oportunidades} oportunidades de fallar")
-    print(f"El abecedario es: {abc}")
+    print(f"El abecedario es: {abc_lista}")
     print(f"La palabra es: {palabra_oculta}")
     letra = input("Ingresa una letra: ")
     letra = letra.lower()
@@ -88,7 +89,7 @@ def adivina_letra(abc: dict, palabra: str, adivinadas: list,oportunidades: int):
 if __name__ == '__main__':
     #Imprime las plantillas
     plantillas = carga_pantillas('plantilla')
-    despliega_plantilla(plantillas, 5)
+    despliega_plantilla(plantillas, 4)
 
     #Imprime las palabras
     lista_oraciones = carga_archivo_texto('./datos/pg15532s.txt')
