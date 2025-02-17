@@ -20,9 +20,9 @@ def ia(simbolos: dict):
     """Estrategia de la computadora"""
     ocupado = True
     while ocupado is True:
-        x = random.choice(list(simbolos.keys()))
-        if simbolos[x] not in ["X", "O"]:
-            simbolos[x] = "O"
+        casilla_elegida = random.choice(list(simbolos.keys()))
+        if simbolos[casilla_elegida] not in ["X", "O"]:
+            simbolos[casilla_elegida] = "O"
             ocupado = False
 
 
