@@ -8,50 +8,43 @@ import unicodedata
 from random import choice
 
 # Función para cargar un archivo de texto
-def carga_archivo_texto(archivo: str) -> list:
-    """
-    Carga un archivo de texto y lo convierte en una lista de palabras.
-    :param archivo: str
-    :return: list
-    """
-    if not os.path.exists(archivo):
-        print(f"Error: El archivo {archivo} no existe.")
-        return []
-    
-    with open(archivo, 'r', encoding="utf-8") as file:
+def carga_archivo_texto(archivo:str)->list:
+    '''Carga un archivo de texto y regresa una lista con las palabras'''
+    with open(archivo, 'r', encoding='utf-8') as file:
         oraciones = file.readlines()
-    return [oracion.strip() for oracion in oraciones]  # Remove newline characters
+    return oraciones
 
 # Función para obtener las palabras del texto
-def obtiene_palabras(lista_oraciones: list) -> list:
-    # Crear un conjunto con palabras alfabéticas
-    set_palabras = {palabra for oracion in lista_oraciones for palabra in oracion.split() if palabra.isalpha()}
-
-    # Remover acentos
-    set_palabras = {unicodedata.normalize('NFKD', palabra).encode('ASCII', 'ignore').decode('utf-8') for palabra in set_palabras}
-
-    return list(set_palabras)
-    """'''Obtiene las palabras de un texto sin signos de puntuación ni caracteres especiales'''
-    texto = ' '.join(lista)[120:]
-    # Remover signos de puntuación, números y caracteres especiales
-    caracteres_permitidos = set('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ')
-    texto = ''.join(c for c in texto if c in caracteres_permitidos)
+def obten_palabras(lista: list)->list:
+    #Obtiene las palabras de un texto
+    texto = ' '.join(lista[120:])
     palabras = texto.split()
+    
+    #Convertimos a minusculas
     minusculas = [palabra.lower() for palabra in palabras]
     set_palabras = set(minusculas)
-    return list(set_palabras)"""
+    
+    #Removemos signos de puntuación y caracteres especiales
+    set_palabras = {palabra.strip(string.punctuation) for palabra in set_palabras}
+    
+    #Removemos números, parentesis, corchetes y otros caracteres
+    set_palabras = {palabra for palabra in set_palabras if palabra.isalpha()}
+
+    #Removemos acentos    
+    set_palabras = {unicodedata.normalize('NFKD', palabra).encode('ascii', 'ignore').decode('ascii') for palabra in set_palabras}
+    
+    return list(set_palabras)
 
 # Función para cargar plantillas
-def carga_pantillas(nombre_plantilla: str) -> dict:
+def carga_pantillas(nombre_plantilla:str)->dict:
     '''Carga una plantilla y regresa una lista con las palabras'''
     plantillas = {}
-    for i in range(5):  # Cambiado a 5 para cargar solo hasta plantilla-4.txt
-        archivo = f'./plantillas/{nombre_plantilla}-{i}.txt'
-        plantillas[i] = carga_archivo_texto(archivo)
+    for i in range(5):
+        plantillas[i] = carga_archivo_texto(f'./plantillas/{nombre_plantilla}-{i}.txt')
     return plantillas
 
 # Función para desplegar una plantilla
-def despliega_plantilla(diccionario: dict, nivel: int):
+def despliega_plantilla(diccionario:list, nivel:int):
     '''Despliega una plantilla del juego'''
     if nivel in diccionario:
         template = diccionario[nivel]
@@ -59,30 +52,33 @@ def despliega_plantilla(diccionario: dict, nivel: int):
             print(renglon)
 
 # Función para adivinar una letra
-def adivina_letra(abc: dict, palabra: str, adivinadas: list,oportunidades: int):
-    """Adivina una letra en la palabra"""
-    adivinadas = []
+def adivina_letra(abc:dict, palabra:str, letras_adivinadas:set, oportunidades:int)->int:
+    #Adivina una letra de una palabra
+    
     palabra_oculta = ""
+    
     for letra in palabra:
-        if letra in adivinadas:
+        if letra in letras_adivinadas:
             palabra_oculta += letra
         else:
             palabra_oculta += "_"
-    abc_lista = " ".join(abc.keys())
     print(f"Tienes {oportunidades} oportunidades de fallar")
-    print(f"El abecedario es: {abc_lista}")
-    print(f"La palabra es: {palabra_oculta}")
-    letra = input("Ingresa una letra: ")
+    abcd = ' '.join(abc.values())
+    print(f"El abecesario es {abcd}")
+    print(f"La palabra es {palabra_oculta}")  
+        
+    letra = input('Ingresa una letra: ')
     letra = letra.lower()
     if letra in abc:
         if abc[letra] == "*":
-            print("Ya ingresaste esa letra")
+            print('Ya adivianaste esa letra')
         else:
             abc[letra] = "*"
             if letra in palabra:
-                adivinadas.append(letra)
+                letras_adivinadas.add(letra)
             else:
                 oportunidades -= 1
+    return oportunidades
 
 
 # Código principal
@@ -100,7 +96,8 @@ if __name__ == '__main__':
     abcdario = {letra:letra for letra in string.ascii_lowercase}
     adivinadas = set()
     oportunidades = 5
-    adivina_letra(abcdario, random, adivinadas, oportunidades)
+    t = adivina_letra(abcdario, random, adivinadas, oportunidades)
+    print(t)
 
 
 
