@@ -9,7 +9,8 @@ class Game:
             "NBA": [x for x in range(50, 136)],
             "NFL": [x for x in range(0, 61)],
             "MLB": [x for x in range(0, 21)],
-            "MLX": [x for x in range(0, 11)]
+            "MLX": [x for x in range(0, 11)],
+            "FIFA": [x for x in range(0, 11)]
         }
     def __init__(self, A:Team, B:Team):
         """Constructor de la clase Game"""
@@ -58,5 +59,3 @@ if __name__ == "__main__":
     filename_json =  "games/game.json"
     with open(filename_json, "w", encoding="utf8") as f:
         f.write(str(game.to_json()))
-        
-    
