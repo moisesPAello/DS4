@@ -1,7 +1,7 @@
 [
     {
         "A": {
-            "name": "Mexico",
+            "name": "Argentina",
             "sport": {
                 "name": "Soccer",
                 "players": 11,
@@ -9,42 +9,42 @@
             },
             "players": [
                 {
-                    "name": "Chicharito"
+                    "name": "Messi"
                 },
                 {
-                    "name": "Piojo"
+                    "name": "Aguero"
                 },
                 {
-                    "name": "Ochoa"
+                    "name": "Di Maria"
                 },
                 {
-                    "name": "Chucky"
+                    "name": "Mascherano"
                 },
                 {
-                    "name": "Tecatito"
+                    "name": "Higuain"
                 },
                 {
-                    "name": "Araujo"
+                    "name": "Dybala"
                 },
                 {
-                    "name": "Moreno"
+                    "name": "Otamendi"
                 },
                 {
-                    "name": "Guardado"
+                    "name": "Romero"
                 },
                 {
-                    "name": "Herrera"
+                    "name": "Rojo"
                 },
                 {
-                    "name": "Layun"
+                    "name": "Banega"
                 },
                 {
-                    "name": "Jimenez"
+                    "name": "Fazio"
                 }
             ]
         },
         "B": {
-            "name": "España",
+            "name": "Brasil",
             "sport": {
                 "name": "Soccer",
                 "players": 11,
@@ -52,43 +52,34 @@
             },
             "players": [
                 {
-                    "name": "Ramos"
+                    "name": "Neymar"
                 },
                 {
-                    "name": "Iniesta"
+                    "name": "Coutihno"
                 },
                 {
-                    "name": "Casillas"
+                    "name": "Marcelo"
                 },
                 {
-                    "name": "Xavi"
+                    "name": "Paulinho"
                 },
                 {
-                    "name": "Pique"
-                },
-                {
-                    "name": "Torres"
-                },
-                {
-                    "name": "Villa"
+                    "name": "Thiago"
                 },
                 {
                     "name": "Silva"
                 },
                 {
-                    "name": "Fabregas"
+                    "name": "Firmino"
                 },
                 {
-                    "name": "Alonso"
-                },
-                {
-                    "name": "Busquets"
+                    "name": "Danilo"
                 }
             ]
         },
         "score": {
-            "Mexico": 0,
-            "España": 0
+            "Argentina": 0,
+            "Brasil": 0
         }
     }
 ]
