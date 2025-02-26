@@ -7,7 +7,7 @@ import json
 def main(archivo_torneo:str):
     """Fucnion pricipal de juego"""
     if archivo_torneo != "":
-        with open(archivo_torneo,"r")as file:
+        with open(archivo_torneo,"r", encoding="utf8")as file:
             torneo=json.load(file)
     else:
         players_mexico=['Chicharito','Piojo','Ochoa','Chucky','Tecatito','Araujo','Moreno','Guardado','Herrera','Layun','Jimenez']
@@ -17,10 +17,11 @@ def main(archivo_torneo:str):
         scoccer=Sport("Soccer",11,"FIFA")
         mexico=Team("Mexico",scoccer,lista_mexico)
         espania = Team("España", scoccer, lista_espania)
+        
         juego = Game(mexico, espania)
         torneo = [juego.to_json()]
         torneo_json = "torneo.json"
-        with open(archivo_torneo, "w", encoding="utf8") as f:
+        with open(torneo_json, "w", encoding="utf8") as f:
             json.dump(torneo, f, ensure_ascii=False, indent=4)
         print(f"Se eescribio el archivo {torneo_json} con un torneo de {len(torneo)} juego(s)")
     #Jugar todos los juegos del torneo
@@ -33,6 +34,6 @@ def main(archivo_torneo:str):
         print("----------------")
         
 if __name__ == "__main__":
-    archivo_torneo = ""
+    archivo_torneo = "torneo.json"
     main(archivo_torneo)
 
