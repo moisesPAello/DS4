@@ -30,10 +30,12 @@ def main(archivo_torneo:str):
             for visitante in equipos:
                 if local != visitante:
                     juego = Game(local, visitante)
-                    juegos[juego.to_json()["A"]["name"]] = juego.to_json()
-                
-        torneo = [juego.to_json()]
-        torneo_json = "torneo.json"
+                    partido = f"{local} - {visitante}"
+                    partido_contrario = f"{visitante} - {local}"
+                    if partido not in juegos and partido_contrario not in juegos:    
+                        juegos[partido] = juego.to_json()
+        torneo = list(juegos.values())
+        torneo_json = "games/torneo.json"
         with open(torneo_json, "w", encoding="utf8") as f:
             json.dump(torneo, f, ensure_ascii=False, indent=4)
         print(f"Se eescribio el archivo {torneo_json} con un torneo de {len(torneo)} juego(s)")
