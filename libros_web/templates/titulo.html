@@ -1,0 +1,28 @@
+<!DOCTYPE html> <!--Estamos especificando que es un documento HTML-->
+<html lang="es"> <!--Espeficica que será un archivo en español-->
+    <head>
+        <meta charset = "UTF-8"> <!--Acepta caracteres con acentos-->
+        <title>Libros Web - Busqueda por titulo</title>
+    </head>
+    <body>
+       <h1>Libros web</h1>
+       <h2>Busqueda por titulo</h2>
+       <form action = "/titulo" method = "post">
+           <label for = "titulo">Titulo:</label>
+           <input type = "text" id = "titulo" name = "titulo">
+           <input type = "submit" value = "Buscar">
+        </form>
+       <p>Resultados</p>
+         <ul>
+            {% for libro in coleccion_libros_por_titulo %}
+                <li>{{ libro.titulo }} - {{ libro.autor }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Menu</h3>
+        <ul>
+            <li><a href = "/titulo">Busqueda por título </a></li>
+            <li><a href = "/autor">Busqueda por autor </a></li>
+            <li><a href = "/letra">Desplegar por letra</a></li>
+        </ul>
+    </body>
+</html>
