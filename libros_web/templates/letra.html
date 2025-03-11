@@ -1,0 +1,26 @@
+<html lang="es">
+    <body>
+        <p>Selecciona la letra a mostrar</p>
+        <div>
+            {% for letra in 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ' %}
+                <a href="/letra/{{letra}}">{{letra}}</a>
+                {% if not loop.last %} | {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <ul>
+                {% for libro in coleccion_libros %}
+                    <li><a href="/libro/{{libro.id}}">{{libro.title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/titulo">Búsqueda por título</a></li>
+                <li><a href="/autor">Búsqueda por autor</a></li>
+                <li><a href="/letra">Desplegar por letra</a></li>
+            </ul>
+        </div>
+    </body>
+</html>

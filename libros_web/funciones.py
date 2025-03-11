@@ -9,7 +9,7 @@ def crear_diccionario(libros: list, llave: str) -> dict:
     ''' Crea un diccionario a partir de una lista de diccionarios '''
     return {fila[llave]: fila for fila in libros}
 
-def buscar_diccionario(diccionario: dict, palabra: str) -> dict:
+def buscar_diccionario(diccionario: dict, palabra: str) -> list:
     ''' Busca una palabra en los titulos de un diccionario '''
     libros = []
     for titulo, libro in diccionario.items():
@@ -17,9 +17,9 @@ def buscar_diccionario(diccionario: dict, palabra: str) -> dict:
             libros.append(libro)
     return libros
 
-def libros_empezando_con(coleccion_libros_por_titulo: list, letra: str) -> dict:
+def libros_empezando_con(coleccion_libros_por_titulo: dict, letra: str) -> dict:
     ''' Busca los libros que empiezan con la letra '''
-    return {titulo: libro for titulo, libro in coleccion_libros_por_titulo.items() if titulo.startswith(letra)}
+    return {titulo: libro for titulo, libro in coleccion_libros_por_titulo.items() if titulo.lower().startswith(letra.lower())}
 
 if __name__ == "__main__":
     archivo_csv = "booklist2000.csv"
@@ -38,4 +38,4 @@ if __name__ == "__main__":
     letra = "b"
     libros_empezando_con_letra = libros_empezando_con(coleccion_libros_por_titulo, letra)
     print(f"libros que empizan con {letra}: {len(libros_empezando_con_letra)}")
-    
+
