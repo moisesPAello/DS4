@@ -90,7 +90,7 @@ class Usuario:
     
     def __str__(self):
         """Metodo para imprimir el objeto Usuario"""
-        return self.nombre + " - " + self.email + " - " + self.username + " - " + self.password
+        return self.nombre
 
 class SistemaCine:
     """Clase para representar el sistema de cine"""
