@@ -150,10 +150,15 @@ class SistemaCine:
         elif clase == Relacion:
             self.idx_relacion = max(self.relaciones.keys()) + 1 if self.relaciones else 0
 
-    def obtener_pelicular_por_actor(self, id_estrella):
+    def obtener_peliculas_por_actor(self, id_estrella):
         """Metodo para obtener las peliculas de un actor"""
         ids_peliculas = [relacion.id_pelicula for relacion in self.relaciones.values() if relacion.id_estrella == id_estrella]
         return [self.peliculas[id_pelicula] for id_pelicula in ids_peliculas]
+    
+    def obtener_actores_por_pelicula(self, id_pelicula):
+        """Metodo para obtener los actores de una pelicula"""
+        ids_actores = [relacion.id_estrella for relacion in self.relaciones.values() if relacion.id_pelicula == id_pelicula]
+        return [self.actores[id_estrella] for id_estrella in ids_actores]
 
 if __name__ == "__main__":
     # Crear instancia del sistema
@@ -203,5 +208,11 @@ if __name__ == "__main__":
             print(actor.__str__())
         except ValueError:
             print("Nombre no encontrado.")
+
+        print(f"\n===== PELÍCULAS DEL ACTOR =====")
+        peliculas = sistema.obtener_peliculas_por_actor(actor.id_estrella)
+        for pelicula in peliculas:
+            print(pelicula.__str__())
+
 
 
