@@ -182,7 +182,7 @@ if __name__ == "__main__":
     # Mostrar algunos ejemplos de los datos cargados
     if sistema.actores:
         print(f"\n===== PRIMER ACTOR =====")
-        actor = sistema.actores[0]
+        actor = sistema.actores[next(iter(sistema.actores))]
         print(f"ID: {actor.id_estrella}")
         print(f"Nombre: {actor.nombre}")
         print(f"Fecha de nacimiento: {actor.fecha_nacimiento}")
@@ -190,16 +190,18 @@ if __name__ == "__main__":
     
     if sistema.peliculas:
         print(f"\n===== PRIMERA PELÍCULA =====")
-        pelicula = sistema.peliculas[0]
+        pelicula = sistema.peliculas[next(iter(sistema.peliculas))]
         print(f"ID: {pelicula.id_pelicula}")
         print(f"Título: {pelicula.titulo}")
         print(f"Fecha de lanzamiento: {pelicula.fecha_lanzamiento}")
 
     if sistema.actores:
-        print(f"\n===== BUSQUEDA ACTOR =====")
-        actor = sistema.actores[0]
-        print(f"Actor: {actor}")
-        peliculas = sistema.obtener_pelicular_por_actor(actor.id_estrella)
-        print(f"Películas: {', '.join([str(pelicula) for pelicula in peliculas])}")
+        print(f"\n===== BÚSQUEDA ACTOR =====")
+        try:
+            nombre_actor = str(input("Ingrese el nombre del actor que desea buscar: "))
+            actor = sistema.actores[next(key for key, value in sistema.actores.items() if value.nombre == nombre_actor)]
+            print(actor.__str__())
+        except ValueError:
+            print("Nombre no encontrado.")
 
 
