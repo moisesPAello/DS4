@@ -5,7 +5,7 @@ from hashlib import sha256
 class Actor:
     """Clase para representar un actor"""
     def __init__(self, id_estrella, nombre, fecha_nacimiento, ciudad_nacimiento, url_imagen):
-        self.id_estrella = int(id_estrella)  # Cast to int
+        self.id_estrella = int(id_estrella)
         self.nombre = nombre
         try:
             self.fecha_nacimiento = datetime.strptime(fecha_nacimiento, '%Y-%m-%d')
@@ -87,6 +87,10 @@ class Usuario:
             'username': self.username,
             'password': self.password
         }
+    
+    def __str__(self):
+        """Metodo para imprimir el objeto Usuario"""
+        return self.nombre + " - " + self.email + " - " + self.username + " - " + self.password
 
 class SistemaCine:
     """Clase para representar el sistema de cine"""
@@ -213,6 +217,15 @@ if __name__ == "__main__":
         peliculas = sistema.obtener_peliculas_por_actor(actor.id_estrella)
         for pelicula in peliculas:
             print(pelicula.__str__())
+
+    if sistema.usuarios:
+        print(f"\n===== BÚSQUEDA USUARIO =====")
+        try:
+            user = sistema.usuarios["Moises"]
+            print(user.__str__())
+        except ValueError:
+            print("Usuario no encontrado.")
+
 
 
 
