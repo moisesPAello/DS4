@@ -156,6 +156,24 @@ class SistemaCine:
         elif clase == Relacion:
             self.idx_relacion = max([int(k) for k in self.relaciones.keys()]) + 1 if self.relaciones else 0
 
+    def guardar_csv(self, archivo, objetos):
+            if not objetos:
+                return
+            with open(archivo, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.DictWriter(f, fieldnames=next(iter(objetos.values())).to_dict().keys())
+                writer.writeheader()
+                for obj in objetos.values():
+                    writer.writerow(obj.to_dict())
+
+    def autenticar_usuario(self, username, password):
+        """Método para autenticar un usuario"""
+        if username in self.usuarios:
+            usuario = self.usuarios[username]
+            if usuario.password == usuario.hash_password(password):
+                self.usuario_actual = usuario
+                return True
+        return False
+
     def obtener_peliculas_por_actor(self, id_estrella):
         """Metodo para obtener las peliculas de un actor"""
         ids_peliculas = [relacion.id_pelicula for relacion in self.relaciones.values() if relacion.id_estrella == id_estrella]
@@ -176,28 +194,30 @@ class SistemaCine:
 
     def agregar_pelicula(self, titulo, fecha_lanzamiento, url_poster):
         """Metodo para agregar una pelicula"""
-        self.idx_pelicula += 1
-        pelicula = Pelicula(self.idx_pelicula, titulo, fecha_lanzamiento, url_poster)
-        self.peliculas[pelicula.id_pelicula] = pelicula
-        return pelicula
+        if self.usuario_actual:
+            self.idx_pelicula += 1
+            pelicula = Pelicula(self.idx_pelicula, titulo, fecha_lanzamiento, url_poster)
+            self.peliculas[pelicula.id_pelicula] = pelicula
+            return pelicula
 
     def agregar_actor(self, nombre, fecha_nacimiento, ciudad_nacimiento, url_imagen):
         """Metodo para agregar un actor"""
-        self.idx_actor += 1
-        actor = Actor(self.idx_actor, nombre, fecha_nacimiento, ciudad_nacimiento, url_imagen)
-        self.actores[actor.id_estrella] = actor
-        return actor
+        if self.usuario_actual:
+            self.idx_actor += 1
+            actor = Actor(self.idx_actor, nombre, fecha_nacimiento, ciudad_nacimiento, url_imagen)
+            self.actores[actor.id_estrella] = actor
+            return actor
 
     def agregar_relacion(self, id_pelicula, id_estrella):
         """Metodo para agregar una relacion"""
-        self.idx_relacion += 1
-        relacion = Relacion(self.idx_relacion, id_estrella, id_pelicula)
-        self.relaciones[relacion.id_relacion] = relacion
-        return relacion
+        if self.usuario_actual:    
+            self.idx_relacion += 1
+            relacion = Relacion(self.idx_relacion, id_estrella, id_pelicula)
+            self.relaciones[relacion.id_relacion] = relacion
+            return relacion
     
     def agregar_usuario(self, username, nombre, email, password):
         """Metodo para agregar un usuario"""
-        # Allow adding users if there are none yet
         if not self.usuarios or self.usuario_actual:
             if username not in self.usuarios:
                 usuario = Usuario(username, nombre, email, password)
@@ -209,15 +229,6 @@ class SistemaCine:
             print("Error: Debe iniciar sesión para agregar usuarios")
         return None
     
-    def autenticar_usuario(self, username, password):
-        """Método para autenticar un usuario"""
-        if username in self.usuarios:
-            usuario = self.usuarios[username]
-            if usuario.password == Usuario.hash_password(password):
-                self.usuario_actual = usuario
-                return True
-        return False
-
 if __name__ == "__main__":
     # Crear instancia del sistema
     sistema = SistemaCine()
@@ -256,7 +267,7 @@ if __name__ == "__main__":
     
     # Pruebas de búsqueda de actores
     print("\n===== PRUEBAS DE BÚSQUEDA DE ACTORES =====")
-    actores_encontrados = sistema.buscar_actor_por_nombre("Mark")
+    actores_encontrados = sistema.buscar_actor_por_nombre("Steve")
     if actores_encontrados:
         print(f"Se encontraron {len(actores_encontrados)} actores:")
         for actor in actores_encontrados:
@@ -266,7 +277,7 @@ if __name__ == "__main__":
     
     # Pruebas de búsqueda de películas
     print("\n===== PRUEBAS DE BÚSQUEDA DE PELÍCULAS =====")
-    peliculas_encontradas = sistema.buscar_pelicula_por_titulo("Star")
+    peliculas_encontradas = sistema.buscar_pelicula_por_titulo("the")
     if peliculas_encontradas:
         print(f"Se encontraron {len(peliculas_encontradas)} películas:")
         for pelicula in peliculas_encontradas:
