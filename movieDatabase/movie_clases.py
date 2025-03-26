@@ -54,17 +54,19 @@ class Pelicula:
 
 class Relacion:
     """Clase para representar la relación entre actores y películas"""
-    def __init__(self, id_relacion, id_estrella, id_pelicula):
+    def __init__(self, id_relacion, id_estrella, id_pelicula, personaje=None):
         self.id_relacion = int(id_relacion)
         self.id_estrella = int(id_estrella)
         self.id_pelicula = int(id_pelicula)
+        self.personaje = personaje
 
     def to_dict(self):
         """Devuelve un diccionario con los datos de la relación"""
         return {
             'id_relacion': self.id_relacion,
+            'id_pelicula': self.id_pelicula,
             'id_estrella': self.id_estrella,
-            'id_pelicula': self.id_pelicula
+            'personaje': self.personaje
         }
 
 class Usuario:
@@ -133,7 +135,8 @@ class SistemaCine:
                         relacion = Relacion(
                             id_relacion=row['id_relacion'],
                             id_estrella=row['id_estrella'],
-                            id_pelicula=row['id_pelicula']
+                            id_pelicula=row['id_pelicula'],
+                            personaje=row.get('personaje', None)
                         )
                         self.relaciones[relacion.id_relacion] = relacion
                     elif clase == Usuario:
@@ -208,11 +211,11 @@ class SistemaCine:
             self.actores[actor.id_estrella] = actor
             return actor
 
-    def agregar_relacion(self, id_pelicula, id_estrella):
+    def agregar_relacion(self, id_pelicula, id_estrella, personaje=None):
         """Metodo para agregar una relacion"""
         if self.usuario_actual:    
             self.idx_relacion += 1
-            relacion = Relacion(self.idx_relacion, id_estrella, id_pelicula)
+            relacion = Relacion(self.idx_relacion, id_estrella, id_pelicula, personaje)
             self.relaciones[relacion.id_relacion] = relacion
             return relacion
     
@@ -236,8 +239,8 @@ if __name__ == "__main__":
     # Rutas a los archivos CSV
     ruta_actores = "datos/movies_db - actores.csv"
     ruta_peliculas = "datos/movies_db - peliculas.csv"
-    ruta_relaciones = "datos/movies_db - relacion.csv"
-    ruta_usuarios = "datos/movies_db - users.csv"
+    ruta_relaciones = "datos/movies_db - relaciones.csv"
+    ruta_usuarios = "datos/movies_db - ususarios.csv"
     
     print("\n===== CARGANDO DATOS =====")
     sistema.carga_csv(ruta_actores, Actor)
@@ -325,9 +328,15 @@ if __name__ == "__main__":
     print("\n===== CREAR RELACIÓN ENTRE ACTOR Y PELÍCULA =====")
     try:
         if 'nueva_pelicula' in locals() and 'nuevo_actor' in locals():
-            nueva_relacion = sistema.agregar_relacion(nueva_pelicula.id_pelicula, nuevo_actor.id_estrella)
+            nueva_relacion = sistema.agregar_relacion(
+                nueva_pelicula.id_pelicula, 
+                nuevo_actor.id_estrella,
+                "Protagonista"  # Ejemplo de personaje
+            )
             print(f"Se creó correctamente la relación entre {nuevo_actor.nombre} y {nueva_pelicula.titulo}")
-            
+            print(f"Personaje: {nueva_relacion.personaje}")
+            sistema.guardar_csv(ruta_relaciones, sistema.relaciones)
+
             # Verificar la relación
             peliculas_actor = sistema.obtener_peliculas_por_actor(nuevo_actor.id_estrella)
             print(f"Películas de {nuevo_actor.nombre}:")
