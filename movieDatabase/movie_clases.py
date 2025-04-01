@@ -75,7 +75,6 @@ class Usuario:
         self.username = username
         self.nombre = nombre
         self.email = email
-        # Hash the password during initialization
         self.password = self.hash_password(password)
 
     @staticmethod
@@ -186,6 +185,25 @@ class SistemaCine:
         """Metodo para obtener los actores de una pelicula"""
         ids_actores = [relacion.id_estrella for relacion in self.relaciones.values() if relacion.id_pelicula == id_pelicula]
         return [self.actores[id_actor] for id_actor in ids_actores]
+
+    def obtener_personajes_por_pelicula(self, id_pelicula):
+        """Método para obtener los actores de una película con sus personajes"""
+        actores_info = []
+        for relacion in self.relaciones.values():
+            if relacion.id_pelicula == id_pelicula:
+                actor = self.actores.get(relacion.id_estrella)
+                if actor:
+                    actores_info.append({"actor": actor, "personaje": relacion.personaje})
+        return actores_info
+
+    def obtener_personajes_por_estrella(self, id_estrella):
+        personajes = []
+        for rel in self.relaciones.values():
+            if rel.id_estrella == id_estrella:
+                pelicula = self.peliculas.get(rel.id_pelicula)
+                if pelicula:
+                    personajes.append({"personaje": rel.personaje, "pelicula": pelicula})
+        return personajes
 
     def buscar_pelicula_por_titulo(self, titulo):
         """Metodo para buscar una pelicula por titulo"""

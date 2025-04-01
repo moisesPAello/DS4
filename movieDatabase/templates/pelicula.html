@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Movie database - {{pelicula.titulo}}{% endblock %}
+{% block body %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">{{ pelicula.titulo }}</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ pelicula.url_poster }}" alt="{{ pelicula.titulo }} Poster" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <p class="card-text"><b>Fecha de lanzamiento:</b> {{ pelicula.fecha_lanzamiento }}</p>
+                    <h5 class="card-subtitle mt-3">Reparto</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Actor</th>
+                                <th>Personaje</th>
+                                <th>Foto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for actor in actores %}
+                            <tr>
+                                <td><a href="/actor/{{ actor.actor.id_estrella }}">{{ actor.actor.nombre }}</a></td>
+                                <td>{{ actor.personaje }}</td>
+                                <td><a href="/actor/{{ actor.actor.id_estrella }}"><img src="{{ actor.actor.url_imagen }}" alt="{{ actor.actor.nombre }}" style="width:100px;height:100px;"></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
