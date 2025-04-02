@@ -258,7 +258,7 @@ if __name__ == "__main__":
     ruta_actores = "datos/movies_db - actores.csv"
     ruta_peliculas = "datos/movies_db - peliculas.csv"
     ruta_relaciones = "datos/movies_db - relaciones.csv"
-    ruta_usuarios = "datos/movies_db - ususarios.csv"
+    ruta_usuarios = "datos/movies_db - usuarios_hashed.csv"
     
     print("\n===== CARGANDO DATOS =====")
     sistema.carga_csv(ruta_actores, Actor)

@@ -59,7 +59,7 @@ def login():
         if login_exitoso:
             print(f"Usuario {username} autenticado correctamente")
             session['logged_in'] = True
-            session['username'] = username
+            session['username'] = sistema.usuario_actual.nombre
             flash('Has iniciado sesión correctamente', 'success')
             return redirect(url_for('index'))
         else:
