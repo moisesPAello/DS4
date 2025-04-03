@@ -75,7 +75,7 @@ class Usuario:
         self.username = username
         self.nombre = nombre
         self.email = email
-        self.password = self.hash_password(password)
+        self.password = password
 
     @staticmethod
     def hash_password(password):
