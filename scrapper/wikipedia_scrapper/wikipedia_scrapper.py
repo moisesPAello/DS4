@@ -16,7 +16,7 @@ def scrap(url:str):
 def guardar_pagina(pagina, nombre_archivo:str):
     """Guarda la pagina en un archivo"""
     with open(nombre_archivo, 'wb') as f:
-        f.write(pagina.contente)
+        f.write(pagina.content)
     print(f"Pagina guardada en {nombre_archivo}")
 
 def main(url:str, archivo_salida:str):
@@ -45,14 +45,10 @@ def main(url:str, archivo_salida:str):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Scrapper para wikipedia')
-    parser.add_argument('--url', type=str, required=True, help='URL de la pagina a scrapear')
-    parser.add_argument('--output', type=str, required=True, help='Nombre del archivo de salida', default='wiki.html')
+    parser.add_argument('--url', type=str, default='https://es.wikipedia.org/wiki/Anexo:Pel%C3%ADculas_de_ciencia_ficci%C3%B3n#1955', 
+                       help='URL de la pagina a scrapear')
+    parser.add_argument('--output', type=str, default='wiki.html',
+                       help='Nombre del archivo de salida')
     args = parser.parse_args()
-    url = args.url
-    output = args.output
-    if not url:
-        url = 'https://es.wikipedia.org/wiki/Anexo:Pel%C3%ADculas_de_ciencia_ficci%C3%B3n#1955'
-    if not output:
-        output = 'wiki.html'
     
-    main(args.url, args.archivo_salida)
+    main(args.url, args.output)

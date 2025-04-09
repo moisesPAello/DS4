@@ -1,0 +1,97 @@
+{
+  "tipo_cambio": 1.0,
+  "precio_compra": 20.0239,
+  "precio_venta": 20.8367,
+  "precios_bancos": [
+    {
+      "banco": "Afirme",
+      "compra": 19.2,
+      "venta": 21.0
+    },
+    {
+      "banco": "Banco Azteca",
+      "compra": 19.15,
+      "venta": 20.5
+    },
+    {
+      "banco": "Banco de México, FIXFIX",
+      "compra": 20.7653,
+      "venta": null
+    },
+    {
+      "banco": "Banco de México, Interbancario 48 hrs aperturaApertura",
+      "compra": 20.9835,
+      "venta": 20.993
+    },
+    {
+      "banco": "Banco de México, Interbancario 48 hrs máximoMáximo",
+      "compra": 20.993,
+      "venta": null
+    },
+    {
+      "banco": "Banco de México, Interbancario 48 hrs mínimoMínimo",
+      "compra": 20.21,
+      "venta": null
+    },
+    {
+      "banco": "Bank of America",
+      "compra": 19.685,
+      "venta": 22.0264
+    },
+    {
+      "banco": "Banorte",
+      "compra": 19.05,
+      "venta": 20.6
+    },
+    {
+      "banco": "BBVA Bancomer",
+      "compra": 19.36,
+      "venta": 20.52
+    },
+    {
+      "banco": "Citibanamex",
+      "compra": 19.61,
+      "venta": 20.74
+    },
+    {
+      "banco": "DOF, Diario Oficial de la Federación",
+      "compra": 20.6867,
+      "venta": null
+    },
+    {
+      "banco": "Grupo Financiero MultivaMultiva",
+      "compra": 20.93,
+      "venta": null
+    },
+    {
+      "banco": "Inbursa",
+      "compra": 19.9,
+      "venta": 20.9
+    },
+    {
+      "banco": "Intercam",
+      "compra": 19.74,
+      "venta": 20.78
+    },
+    {
+      "banco": "Monex",
+      "compra": 19.21,
+      "venta": 21.23
+    },
+    {
+      "banco": "Para pagos de obligacionesPara pagos",
+      "compra": 20.6947,
+      "venta": null
+    },
+    {
+      "banco": "SAT, Servicio de Administración Tributaria",
+      "compra": 20.6867,
+      "venta": null
+    },
+    {
+      "banco": "Ve por mas",
+      "compra": 19.5751,
+      "venta": 20.8051
+    }
+  ]
+}
