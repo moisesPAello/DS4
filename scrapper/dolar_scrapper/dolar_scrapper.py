@@ -5,6 +5,16 @@ from bs4 import BeautifulSoup
 import os
 import argparse
 import json
+from datetime import datetime
+
+# Agregar esta constante al inicio del archivo
+CARPETA_DATOS = os.path.join(os.path.dirname(__file__), "data")
+
+def crear_carpeta_datos():
+    """Crea la carpeta data si no existe"""
+    if not os.path.exists(CARPETA_DATOS):
+        os.makedirs(CARPETA_DATOS)
+        print(f"Carpeta creada: {CARPETA_DATOS}")
 
 def obtener_pagina(url: str):
     """Obtiene la página web desde internet"""
@@ -48,23 +58,31 @@ def extraer_tipos_cambio(sopa):
 
 def main(url: str, archivo_salida: str):
     """Función principal del programa"""
-    if not os.path.exists(archivo_salida):
+    # Crear carpeta data si no existe
+    crear_carpeta_datos()
+    
+    # Construir rutas completas para los archivos
+    ruta_html = os.path.join(CARPETA_DATOS, archivo_salida)
+    ruta_json = os.path.join(CARPETA_DATOS, archivo_salida.replace('.html', '.json'))
+    
+    if not os.path.exists(ruta_html):
         respuesta = obtener_pagina(url)
-        guardar_html(respuesta, archivo_salida)
+        guardar_html(respuesta, ruta_html)
     else:
-        print(f"El archivo {archivo_salida} ya existe. Usando versión guardada.")
-        with open(archivo_salida, 'rb') as archivo:
+        print(f"El archivo {ruta_html} ya existe. Usando versión guardada.")
+        with open(ruta_html, 'rb') as archivo:
             respuesta = requests.Response()
             respuesta._content = archivo.read()
 
     sopa = BeautifulSoup(respuesta.content, 'html.parser')
     datos_dolar = extraer_tipos_cambio(sopa)
     
-    # Guardar en formato JSON
-    archivo_json = archivo_salida.replace('.html', '.json')
-    with open(archivo_json, 'w', encoding='utf8') as archivo:
+    # Agregar fecha y hora de la consulta
+    datos_dolar['fecha_consulta'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    
+    with open(ruta_json, 'w', encoding='utf8') as archivo:
         json.dump(datos_dolar, archivo, indent=2, ensure_ascii=False)
-    print(f"Datos guardados en {archivo_json}")
+    print(f"Datos guardados en {ruta_json}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Scrapper para el tipo de cambio del dólar')

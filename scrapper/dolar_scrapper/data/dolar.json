@@ -1,66 +1,66 @@
 {
   "tipo_cambio": 1.0,
-  "precio_compra": 20.0239,
-  "precio_venta": 20.8367,
+  "precio_compra": 20.0133,
+  "precio_venta": 20.8203,
   "precios_bancos": [
     {
       "banco": "Afirme",
-      "compra": 19.2,
+      "compra": 19.4,
       "venta": 21.0
     },
     {
       "banco": "Banco Azteca",
-      "compra": 19.15,
-      "venta": 20.5
+      "compra": 19.2,
+      "venta": 20.7
     },
     {
       "banco": "Banco de México, FIXFIX",
-      "compra": 20.7653,
+      "compra": 20.492,
       "venta": null
     },
     {
       "banco": "Banco de México, Interbancario 48 hrs aperturaApertura",
-      "compra": 20.9835,
-      "venta": 20.993
+      "compra": 20.465,
+      "venta": 20.475
     },
     {
       "banco": "Banco de México, Interbancario 48 hrs máximoMáximo",
-      "compra": 20.993,
+      "compra": 20.583,
       "venta": null
     },
     {
       "banco": "Banco de México, Interbancario 48 hrs mínimoMínimo",
-      "compra": 20.21,
+      "compra": 20.401,
       "venta": null
     },
     {
       "banco": "Bank of America",
-      "compra": 19.685,
-      "venta": 22.0264
+      "compra": 19.3424,
+      "venta": 21.5983
     },
     {
       "banco": "Banorte",
-      "compra": 19.05,
-      "venta": 20.6
+      "compra": 19.25,
+      "venta": 20.8
     },
     {
       "banco": "BBVA Bancomer",
-      "compra": 19.36,
-      "venta": 20.52
+      "compra": 19.57,
+      "venta": 20.73
     },
     {
       "banco": "Citibanamex",
-      "compra": 19.61,
-      "venta": 20.74
+      "compra": 19.93,
+      "venta": 21.07
     },
     {
       "banco": "DOF, Diario Oficial de la Federación",
-      "compra": 20.6867,
+      "compra": 20.7653,
       "venta": null
     },
     {
       "banco": "Grupo Financiero MultivaMultiva",
-      "compra": 20.93,
+      "compra": 20.31,
       "venta": null
     },
     {
@@ -70,28 +70,29 @@
     },
     {
       "banco": "Intercam",
-      "compra": 19.74,
-      "venta": 20.78
+      "compra": 19.94,
+      "venta": 20.99
     },
     {
       "banco": "Monex",
-      "compra": 19.21,
-      "venta": 21.23
+      "compra": 19.39,
+      "venta": 21.43
     },
     {
       "banco": "Para pagos de obligacionesPara pagos",
-      "compra": 20.6947,
-      "venta": null
-    },
-    {
-      "banco": "SAT, Servicio de Administración Tributaria",
       "compra": 20.6867,
       "venta": null
     },
     {
+      "banco": "SAT, Servicio de Administración Tributaria",
+      "compra": 20.7653,
+      "venta": null
+    },
+    {
       "banco": "Ve por mas",
-      "compra": 19.5751,
-      "venta": 20.8051
+      "compra": 19.8483,
+      "venta": 21.0683
     }
-  ]
+  ],
+  "fecha_consulta": "2025-04-10 14:30:44"
 }
